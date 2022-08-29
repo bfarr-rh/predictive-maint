@@ -9,16 +9,27 @@
     var person = 0
     var refreshIntervalId;
 
+
+
+    $( document ).ready(function() {
+        $('#stop-button').hide();
+    });
+    
+
     function start(){
         stop();
         minio_location = 'minio/image-prediction/'
         refreshIntervalId = setInterval(fetchData, 1000);
+        $('#start-button').hide();
+        $('#stop-button').show();
     }
 
     function stop(){
         if (refreshIntervalId) {
             clearInterval(refreshIntervalId);
         }
+        $('#start-button').show();
+        $('#stop-button').hide();
     }
 
     function fetchData(){
@@ -129,25 +140,33 @@
         background-color: #04AA6D;
         border: none;
         color: white;
-        padding: 60px;
+        padding: 50px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 32px;
-        margin: 4px 2px;
+        font-size: 48px;
+        margin: 40px 2px;
         border-radius: 12px;
+        cursor: pointer;
+    }
+    .block:hover {
+        background-color: #03d387;
     }
     .block-red {
-        background-color: red;
+        background-color: rgb(230, 10, 10);
         border: none;
         color: white;
-        padding: 60px;
+        padding: 50px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 32px;
-        margin: 4px 2px;
+        font-size: 48px;
+        margin: 40px 2px;
         border-radius: 12px;
+        cursor: pointer;
+    }
+    .block-red:hover {
+        background-color: red;
     }
 </style>
 <head>
@@ -178,8 +197,8 @@
 <hr>
 <div id="minioserverdiv" class="col-5">
     <div class="row">
-        <input type="button" value="Start" onclick="start()" class="block">
-        <input type="button" value="Stop" onclick="stop()" class="block-red">
+        <input id="start-button" type="button" value="Start" onclick="start()" class="block">
+        <input id="stop-button" type="button" value="Stop" onclick="stop()" class="block-red">
     </div>
     
 </div>
